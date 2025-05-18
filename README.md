@@ -1,6 +1,6 @@
    # Plateforme GMAO – Démo Flask
 
-   Cette application Flask simule une plateforme de gestion de la maintenance (GMAO) dédiée aux pièces d'une unité de dessalement.
+   Cette application Flask est une plateforme de gestion de la maintenance (GMAO) dédiée aux pièces d'une unité de dessalement.
 
    ## 🔧 Fonctionnalités principales
    - Visualisation de l’état des pièces : stock, durée de vie, criticité
