@@ -12,6 +12,7 @@
 
    ```bash
    # 1. Cloner le projet ou naviguer dans le dossier
+   git clone https://github.com/MedAmine000/Safae.git
    cd project_gmao
 
    # 2. Créer un environnement virtuel (optionnel mais recommandé)
