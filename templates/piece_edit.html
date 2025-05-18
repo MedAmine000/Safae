@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Modifier : {{ piece['description'] }}</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Stock actuel</label>
+        <input type="number" name="stock_actuel" value="{{ piece['stock_actuel'] }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Stock minimum</label>
+        <input type="number" name="stock_minimum" value="{{ piece['stock_minimum'] }}" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+</form>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Tableau de bord – Vue d'ensemble</h2>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+	<div class="card">
+	  <div class="card-body">
+		<h5 class="card-title">Pièces urgentes</h5>
+		<p class="card-text">{{ stats['Urgente'] if 'Urgente' in stats else 0 }} pièces critiques</p>
+	  </div>
+	</div>
+  </div>
+  <div class="col-md-4">
+	<div class="card">
+	  <div class="card-body">
+		<h5 class="card-title">Coût moyen des pièces</h5>
+		<p class="card-text">{{ avg_cost|round(2) }} €</p>
+	  </div>
+	</div>
+  </div>
+  <div class="col-md-4">
+	<div class="card">
+	  <div class="card-body">
+		<h5 class="card-title">Alertes de stock</h5>
+		<p class="card-text">{{ alerts|length }} pièces sous le minimum</p>
+	  </div>
+	</div>
+  </div>
+</div>
+
+<canvas id="critChart" width="200" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const data = {
+	labels: {{ stats.keys()|list|tojson }},
+	datasets: [{
+	  label: 'Répartition des criticités',
+      data: {{ stats.values()|list|tojson }},
+      backgroundColor: [
+        'rgba(40, 167, 69, 0.5)',   // Vert pour faible criticité
+        'rgba(255, 193, 7, 0.5)',   // Jaune pour moyenne criticité
+        'rgba(220, 53, 69, 0.5)'    // Rouge pour haute criticité
+      ],
+      borderColor: [
+        'rgba(40, 167, 69, 1)',
+        'rgba(255, 193, 7, 1)',
+        'rgba(220, 53, 69, 1)'
+      ],
+	  borderWidth: 1
+	}]
+  };
+  const config = {
+	type: 'pie',
+	data: data
+  };
+  new Chart(document.getElementById('critChart'), config);
+</script>
+
+<h3 class="mt-4">📋 Aperçu des dernières pièces</h3>
+<ul>
+  {% for piece in pieces %}
+  <li><a href="{{ url_for('detail_piece', piece_id=piece['rowid']) }}">{{ piece['description'] }}</a> – Stock: {{ piece['stock_actuel'] }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

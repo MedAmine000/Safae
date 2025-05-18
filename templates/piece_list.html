@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Liste des pièces</h2>
+<table class="table table-striped">
+    <thead><tr><th>ID</th><th>Description</th><th>Type</th><th>Stock</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for piece in pieces %}
+        <tr>
+            <td>{{ piece['rowid'] }}</td>
+            <td>{{ piece['description'] }}</td>
+            <td>{{ piece['type'] }}</td>
+            <td>{{ piece['stock_actuel'] }}</td>
+            <td><a href="{{ url_for('detail_piece', piece_id=piece['rowid']) }}">Voir</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
